@@ -70,4 +70,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cantOpenUrl => 'Can\'t open URL.';
+
+  @override
+  String get columns => 'columns';
+
+  @override
+  String get rows => 'rows';
+
+  @override
+  String get fps => 'fps';
 }

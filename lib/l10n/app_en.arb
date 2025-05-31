@@ -19,5 +19,8 @@
     "conwaysGameOfLifeContent": "The most well-known example of a cellular automaton is the Game of Life, created by John Conway in 1970.\n It operates on a two-dimensional grid where each cell is either “alive” or “dead.” The rules determine the birth, survival, or death of a cell based on the number of its neighbors.\n Although the rules are simple, the game produces surprising patterns – from stable structures to objects that move or replicate.\n The Game of Life has inspired scientists and artists alike, demonstrating how order can emerge from apparent chaos.",
     "conwaysGameOfLifeLearnMore": "Learn more",
     "conwaysGameOfLifeUrl": "https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life",
-    "cantOpenUrl" : "Can't open URL."
+    "cantOpenUrl" : "Can't open URL.",
+    "columns" : "columns",
+    "rows" : "rows",
+    "fps" : "fps"
 }

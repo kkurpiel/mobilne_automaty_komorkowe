@@ -70,4 +70,13 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get cantOpenUrl => 'Nie można otworzyć URL.';
+
+  @override
+  String get columns => 'kolumny';
+
+  @override
+  String get rows => 'wiersze';
+
+  @override
+  String get fps => 'klatki na sekundę';
 }

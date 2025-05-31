@@ -220,6 +220,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Can\'t open URL.'**
   String get cantOpenUrl;
+
+  /// No description provided for @columns.
+  ///
+  /// In en, this message translates to:
+  /// **'columns'**
+  String get columns;
+
+  /// No description provided for @rows.
+  ///
+  /// In en, this message translates to:
+  /// **'rows'**
+  String get rows;
+
+  /// No description provided for @fps.
+  ///
+  /// In en, this message translates to:
+  /// **'fps'**
+  String get fps;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
