@@ -6,6 +6,7 @@ import 'package:mobilne_automaty_komorkowe/models/grid_model.dart';
 import 'package:path_provider/path_provider.dart';
 
 class GameSaveService {
+  /// Sprawdzenie ,czy plik z zapisanymi grami istnieje, jezeli nie istnieje to zostaje dodany jako pusta tablica w formacie JSON
   Future<void> checkSavingFile() async {
     final directory = await getApplicationDocumentsDirectory();
     final file = File('${directory.path}/savedGames.json');
@@ -16,6 +17,8 @@ class GameSaveService {
     }
   }
 
+  /// Zapisywanie gry:
+  /// Pobranie zawartosci pliku, dopisanie nowego obiektu i zapisanie do pliku
   Future<void> saveGame(GameModel game) async {
     final directory = await getApplicationDocumentsDirectory();
     final file = File('${directory.path}/savedGames.json');
@@ -43,6 +46,7 @@ class GameSaveService {
     await file.writeAsString(encoded);
   }
   
+  /// Pobranie i deserializacja zapisanych rozgrywek
   Future<List<GameModel>> getSavedGames() async {
     final directory = await getApplicationDocumentsDirectory();
     final file = File('${directory.path}/savedGames.json');
@@ -53,6 +57,7 @@ class GameSaveService {
     return gamesList.map((json) => fromJson(json as Map<String, dynamic>)).toList();
   }
 
+  /// Pobranie zawartosci pliku i usuniecie wskazanych rozgrywek
   Future<void> deleteSavedGamesByName(List<String> names) async {
     final directory = await getApplicationDocumentsDirectory();
     final file = File('${directory.path}/savedGames.json');
@@ -69,6 +74,7 @@ class GameSaveService {
     await file.writeAsString(encoded);
   }
 
+  /// Pomocnicza metoda serializacji do formatu JSON
   Map<String, dynamic> toJson(GameModel game) {
     return {
       'name': game.name,
@@ -88,6 +94,7 @@ class GameSaveService {
     };
   }
 
+  /// Pomocnicza metoda do deserializacji z formatu JSON
   GameModel fromJson(Map<String, dynamic> json) {
     final excerciseJson = json['excercise'] as Map<String, dynamic>;
     final answerJson = json['answer'] as Map<String, dynamic>;
@@ -110,6 +117,7 @@ class GameSaveService {
     );
   }
 
+  /// Parsowanie tablicy z zapisanym ukladem komorek
   List<List<bool>> parseSelectedCells(Map<String, dynamic> gridJson) {
     final rawSelectedCells = gridJson['selectedCells'] as List<dynamic>;
     return rawSelectedCells.map((row) {

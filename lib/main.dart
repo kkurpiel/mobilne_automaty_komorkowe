@@ -16,6 +16,7 @@ class MobilneAutomatyKomorkoweApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       initialRoute: '/',
       onGenerateRoute: (settings) {
         switch (settings.name) {

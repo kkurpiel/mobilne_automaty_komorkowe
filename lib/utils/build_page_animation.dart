@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Budowanie animacji zmiany strony aplikacji
 PageRoute<dynamic> buildPageTransition(RouteSettings settings, Widget child) {
   return PageRouteBuilder(
     settings: settings,

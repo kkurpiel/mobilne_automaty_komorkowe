@@ -4,6 +4,7 @@ import 'package:mobilne_automaty_komorkowe/models/grid_model.dart';
 import 'package:mobilne_automaty_komorkowe/models/simulation_model.dart';
 
 class GameOfLifeService {
+  /// Metoda tworzaca kolejna generacje dla modelu siatki
   void createNextGenerationGrid(GridModel grid) {
     final rows = grid.rows;
     final cols = grid.columns;
@@ -33,6 +34,7 @@ class GameOfLifeService {
     grid.selectedCells = newGrid;
   }
 
+  /// Metoda tworzaca kolejna generacje dla symulacji
   void createNextGeneration(SimulationModel simulation) {
     final rows = simulation.grid.rows;
     final cols = simulation.grid.columns;
@@ -71,6 +73,7 @@ class GameOfLifeService {
     simulation.hasAliveCells = hasAliveCells;
   }
 
+  /// Cofniecie generacji w symulacji
   void undoGeneration(SimulationModel simulation ) {
     if (simulation.simulationHistory.isNotEmpty) {
       simulation.grid.selectedCells = simulation.simulationHistory.removeLast();
@@ -78,6 +81,7 @@ class GameOfLifeService {
     }
   }
 
+  /// Restart symulacji, ustawianie wszystkich komorek na martwe, czyszczenie historii symulacji
   void restartSimulation(SimulationModel simulation) {
     simulation.generationCounter = 0;
     simulation.grid.selectedCells = List.generate(
@@ -88,6 +92,7 @@ class GameOfLifeService {
     simulation.hasAliveCells = false;
   }
 
+  /// Sprawdzanie, czy podane siatki sa takie same
   bool areGridsEqual(List<List<bool>> a, List<List<bool>> b) {
     if (a.length != b.length) return false;
 
@@ -101,6 +106,7 @@ class GameOfLifeService {
     return true;
   }
 
+  /// Tworzenie losowej siatki
   GridModel generateRandomGrid(GridModel grid) {
     grid.selectedCells = List.generate(
       grid.rows,
@@ -109,6 +115,7 @@ class GameOfLifeService {
     return grid;
   }
 
+  /// Ustawianie wszystkich komorek na martwe
   GridModel clearGrid(GridModel grid) {
     grid.selectedCells = List.generate(
       grid.rows,

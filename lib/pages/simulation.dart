@@ -23,26 +23,40 @@ class SimulationPage extends StatefulWidget {
 }
 
 class SimulationPageState extends State<SimulationPage> {
+  /// Inicjalizacja serwisu odpowiedzialnego za zarzadzanie gra w zycie
   late GameOfLifeService gameOfLifeService = GameOfLifeService();
+
+  /// Inicjalizacja modelu symulacji domyslnymi wartosciami
   late SimulationModel simulation = SimulationModel(
     grid: GridModel(columns: 20, rows: 20),
     fps: 3,
     hasAliveCells: false,
   );
 
+  /// Timer odpowiedzialny za przechodzenie przez kolejne generacje w okreslonym czasie
   Timer? timer;
+
+  /// Flaga okreslajaca, czy plansza jest edytowalna
   bool isGridEditable = false;
+
+  /// Flaga okreslajaca, czy gra jest w trybie automatycznym
   bool isGameRunning = false;
+
+  /// Ilosc pikseli na komorke, inicjalizowana z wartoscia 10 
+  /// (wartosc faktyczna zostaje obliczona na podstawie ustawionych przez uzytkownika wartosci)
   late int pixelsPerCell = 10;
 
+  /// Klucz globalny planszy
   final GlobalKey<SelectableGridState> gridKey = GlobalKey<SelectableGridState>();
 
+  /// Inicjalizacja stanu
   @override
   void initState() {
     super.initState();
     initializeSimulation();
   }
 
+  /// Budowanie widgetu
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -139,12 +153,14 @@ class SimulationPageState extends State<SimulationPage> {
     );
   }
 
+  /// Zwolnienie zasobow i przerwanie dzialania timera
   @override
   void dispose() {
     timer?.cancel();
     super.dispose();
   }
 
+  /// Zatrzymanie symulacji
   void pauseGame() {
     timer?.cancel();
     setState(() {
@@ -152,6 +168,8 @@ class SimulationPageState extends State<SimulationPage> {
     });
   }
 
+  /// Inicjalizacja symulacji, uzytkownik wybiera rozmiar planszy i ilosc generacji na sekunde.
+  /// Jezeli uzytkownik kliknie poza wyswietlony dialog zostanie przeniesiony do menu
   Future<void> initializeSimulation() async {
     try {
       await Future.delayed(Duration.zero);
@@ -197,6 +215,8 @@ class SimulationPageState extends State<SimulationPage> {
     }
   }
 
+  /// Rozpoczecie gry, ustawienie wartosci odswiezania symulacji
+  /// Sprawdzenie, czy powstala generacja posiada zywe komorki oraz czy nie jest taka sama jak poprzednia 
   void startGame() {
     try {
       final delay = Duration(milliseconds: (1000 / simulation.fps).round());
@@ -245,6 +265,9 @@ class SimulationPageState extends State<SimulationPage> {
     }
   }
 
+  /// Tworzenie nowej generacji.
+  /// Sprawdzenie, czy stoworzona generacja posiada zywe komorki oraz czy gra nie zostala zapetlona
+  /// Podczas sprawdzania zapetlenia sprawdzane jest, czy nowo wygenerowana generacja nie jest taka sama jak ostatnie dwie generacje
   void createNextGeneration() {
     try {
       setState(() {
@@ -288,6 +311,7 @@ class SimulationPageState extends State<SimulationPage> {
     }
   }
 
+  /// Cofniecie generacji
   void undoGeneration() {
     try {
       setState(() {
@@ -305,6 +329,7 @@ class SimulationPageState extends State<SimulationPage> {
     }
   }
 
+  /// Restart symulacji, uzytkownik od nowa moze zaznaczyc komorki
   void restartSimulation() {
     try {
       timer?.cancel();

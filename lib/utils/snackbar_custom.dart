@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobilne_automaty_komorkowe/widgets/text_custom.dart';
 
+/// Budowanie snackBara zawierajacego styl aplikacji
 SnackBar buildCustomSnackBar(String message, {bool isError = false}) {
   return SnackBar(
     behavior: SnackBarBehavior.floating,
